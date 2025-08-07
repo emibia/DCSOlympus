@@ -70,6 +70,10 @@ namespace DataIndex {
 		aimMethodRange,
 		acquisitionRange,
 		airborne,
+		yaw,
+		roll,
+		pitch,
+		aoa,
 		lastIndex,
 		endOfData = 255
 	};

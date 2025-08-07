@@ -286,6 +286,10 @@ export interface UnitData {
   aimMethodRange: number;
   acquisitionRange: number;
   airborne: boolean;
+  yaw: number; // Yaw angle in degrees
+  roll: number; // Roll angle in degrees
+  pitch: number; // Pitch angle in degrees
+  aoa: number; // Angle of Attack in degrees
 }
 
 export interface LoadoutItemBlueprint {

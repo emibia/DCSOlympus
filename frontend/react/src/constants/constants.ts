@@ -547,6 +547,10 @@ export enum DataIndexes {
   aimMethodRange,
   acquisitionRange,
   airborne,
+  yaw,
+  roll,
+  pitch,
+  aoa,
   endOfData = 255,
 }
 

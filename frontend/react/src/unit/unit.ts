@@ -159,6 +159,10 @@ export abstract class Unit extends CustomMarker {
   #racetrackAnchor: LatLng = new LatLng(0, 0);
   #racetrackBearing: number = 0;
   #airborne: boolean = false;
+  #yaw: number = 0; // Yaw angle in degrees
+  #roll: number = 0; // Roll angle in degrees
+  #pitch: number = 0; // Pitch angle in degrees
+  #aoa: number = 0; // Angle of Attack in degrees
 
   /* Other members used to draw the unit, mostly ancillary stuff like targets, ranges and so on */
   #blueprint: UnitBlueprint | null = null;
@@ -406,6 +410,18 @@ export abstract class Unit extends CustomMarker {
   getAirborne() {
     return this.#airborne;
   }
+  getYaw() {
+    return this.#yaw;
+  } // Yaw angle in degrees
+  getRoll() {
+    return this.#roll;
+  } // Roll angle in degrees
+  getPitch() {
+    return this.#pitch;
+  } // Pitch angle in degrees
+  getAOA() {
+    return this.#aoa;
+  } // Angle of Attack in degrees
 
   static getConstructor(type: string) {
     if (type === "GroundUnit") return GroundUnit;
@@ -797,6 +813,17 @@ export abstract class Unit extends CustomMarker {
         case DataIndexes.airborne:
           this.#airborne = dataExtractor.extractBool();
           break;
+        case DataIndexes.yaw:
+          this.#yaw = dataExtractor.extractFloat64();
+          break;
+        case DataIndexes.roll:
+          this.#roll = dataExtractor.extractFloat64();
+          break;
+        case DataIndexes.pitch:
+          this.#pitch = dataExtractor.extractFloat64();
+          break;
+        case DataIndexes.aoa:
+          this.#aoa = dataExtractor.extractFloat64();
         default:
           break;
       }
@@ -920,6 +947,10 @@ export abstract class Unit extends CustomMarker {
       aimMethodRange: this.#aimMethodRange,
       acquisitionRange: this.#acquisitionRange,
       airborne: this.#airborne,
+      yaw: this.#yaw,
+      roll: this.#roll,
+      pitch: this.#pitch,
+      aoa: this.#aoa,
     };
   }
 

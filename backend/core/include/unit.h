@@ -130,6 +130,10 @@ public:
 	virtual void setAcquisitionRange(double newValue) { updateValue(acquisitionRange, newValue, DataIndex::acquisitionRange); }
 	virtual void setRadarState(bool newValue) { updateValue(radarState, newValue, DataIndex::radarState); }
 	virtual void setAirborne(bool newValue) { updateValue(airborne, newValue, DataIndex::airborne); }
+	virtual void setYaw(double newValue) { updateValue(yaw, newValue, DataIndex::yaw); }
+	virtual void setRoll(double newValue) { updateValue(roll, newValue, DataIndex::roll); }
+	virtual void setPitch(double newValue) { updateValue(pitch, newValue, DataIndex::pitch); }
+	virtual void setAOA(double newValue) { updateValue(aoa, newValue, DataIndex::aoa); }
 
 	/********** Getters **********/
 	virtual string getCategory() { return category; };
@@ -197,6 +201,10 @@ public:
 	virtual double getAcquisitionRange() { return acquisitionRange; }
 	virtual bool getRadarState() { return radarState; }
 	virtual bool getAirborne() { return airborne; }
+	virtual double getYaw() { return yaw; }
+	virtual double getRoll() { return roll; }
+	virtual double getPitch() { return pitch; }
+	virtual double getAOA() { return aoa; }
 
 protected:
 	unsigned int ID;
@@ -267,6 +275,10 @@ protected:
 	double aimMethodRange = 0; 
 	double acquisitionRange = 0; 
 	bool airborne = false;
+	double yaw = 0;		/* Yaw angle in degrees */
+	double roll = 0;	/* Roll angle in degrees */
+	double pitch = 0;	/* Pitch angle in degrees */
+	double aoa = 0;		/* Angle of Attack in degrees */
 
 	/********** Other **********/
 	unsigned int taskCheckCounter = 0;

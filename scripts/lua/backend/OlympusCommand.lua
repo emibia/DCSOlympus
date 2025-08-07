@@ -1247,6 +1247,12 @@ function Olympus.setUnitsData(arg, time)
 					local heading = math.atan2( position.x.z, position.x.x )
 					local velocity = unit:getVelocity();
 					local airborne = unit:inAir()
+					local climbangle = 0
+					local yaw = 0
+					local roll = 0
+					local pitch = 0
+					local aoa = 0
+					local angles = mist.getAttitude(unit);
 					
 					-- Fill the data table
 					table["unitID"] = unit:getID()
@@ -1261,6 +1267,26 @@ function Olympus.setUnitsData(arg, time)
 					table["verticalVelocity"] = velocity.y
 					table["heading"] = heading 
 					table["airborne"] = airborne
+
+					if angles and table['category'] == 'Aircraft' then
+						-- Olympus.debug("Olympus.setUnitsData: angles found for unit " .. unit:getName() .. " (" .. table["category"] .. ")", 2)
+						Olympus.debug("Olympus.setUnitsData: angles found for unit " .. unit:getName() .. " (" .. table["category"] .. ")", 2)
+
+						-- If the angles are found, use them
+						heading = angles.Heading or 0
+						pitch = angles.Pitch or 0
+						roll = angles.Roll or 0 
+						yaw = angles.Yaw or 0
+						aoa = angles.AoA or 0
+						climbangle = angles.ClimbAngle or 0
+						-- Olympus.debug("Olympus.setUnitsData: angles for unit " .. unit:getName() .. " - Heading: " .. heading .. ", Pitch: " .. pitch .. ", Roll: " .. roll .. ", Yaw: " .. yaw .. ", AoA: " .. aoa .. " ", 2)
+						Olympus.debug("Olympus.setUnitsData: angles for unit " .. unit:getName() .. " Yaw: " .. yaw .. " Roll: " .. roll .. "Pitch: " .. pitch .. " ", 2)
+					end
+					table["yaw"] = yaw
+					table["roll"] = roll
+					table["pitch"] = pitch
+					table["aoa"] = aoa
+					--table["climbangle"] = climbangle
 
 					-- Track angles are wrong because of weird reference systems, approximate it using latitude and longitude differences
 					if (table["horizontalVelocity"] > 1) then

@@ -155,7 +155,15 @@ void Unit::update(json::value json, double dt)
 
 	if (json.has_boolean_field(L"airborne"))
 		setAirborne(json[L"airborne"].as_bool());
-
+	
+	if (json.has_number_field(L"yaw"))
+		setYaw(json[L"yaw"].as_number().to_double());
+	if (json.has_number_field(L"roll"))
+		setRoll(json[L"roll"].as_number().to_double());
+	if (json.has_number_field(L"pitch"))
+		setPitch(json[L"pitch"].as_number().to_double());
+	if (json.has_number_field(L"aoa"))
+		setAOA(json[L"aoa"].as_number().to_double());
 	runAILoop();
 }
 
@@ -257,6 +265,8 @@ void Unit::getData(stringstream& ss, unsigned long long time)
 		appendNumeric(ss, datumIndex, alive);
 		datumIndex = DataIndex::unitID;
 		appendNumeric(ss, datumIndex, unitID);
+		datumIndex = DataIndex::groupID;
+		appendNumeric(ss, datumIndex, groupID);
 	}
 	else {
 		for (unsigned char datumIndex = DataIndex::startOfData + 1; datumIndex < DataIndex::lastIndex; datumIndex++)
@@ -328,6 +338,10 @@ void Unit::getData(stringstream& ss, unsigned long long time)
 					case DataIndex::aimMethodRange:				appendNumeric(ss, datumIndex, aimMethodRange); break;
 					case DataIndex::acquisitionRange:			appendNumeric(ss, datumIndex, acquisitionRange); break;
 					case DataIndex::airborne:					appendNumeric(ss, datumIndex, airborne); break;
+					case DataIndex::yaw:						appendNumeric(ss, datumIndex, yaw); break;
+					case DataIndex::roll:						appendNumeric(ss, datumIndex, roll); break;
+					case DataIndex::pitch:						appendNumeric(ss, datumIndex, pitch); break;
+					case DataIndex::aoa:						appendNumeric(ss, datumIndex, aoa); break;
 				}
 			}
 		}
